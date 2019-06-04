@@ -445,7 +445,7 @@ WifiWizard2.enable(ssid, bindAll, waitForConnection)
 
 ## Master
 
-Run ```cordova plugin add @osvlabs/cordova-plugin-wifiwizard2```
+Run ```ionic cordova plugin add @osvlabs/cordova-plugin-wifiwizard2@latest```
 
 To install from the master branch (latest on GitHub)
 
