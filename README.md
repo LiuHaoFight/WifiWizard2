@@ -445,7 +445,7 @@ WifiWizard2.enable(ssid, bindAll, waitForConnection)
 
 ## Master
 
-Run ```cordova plugin add https://github.com/tripflex/wifiwizard2```
+Run ```cordova plugin add @osvlabs/cordova-plugin-wifiwizard2```
 
 To install from the master branch (latest on GitHub)
 
