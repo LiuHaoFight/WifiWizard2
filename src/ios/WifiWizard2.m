@@ -200,6 +200,8 @@
       pluginResult =
           [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                             messageAsString:@"Denied location permission"];
+      [self.commandDelegate sendPluginResult:pluginResult
+                                  callbackId:command.callbackId];
     } else {
       CLLocationManager *cllocation = [[CLLocationManager alloc] init];
       if (![CLLocationManager locationServicesEnabled] ||
