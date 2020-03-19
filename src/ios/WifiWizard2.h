@@ -11,6 +11,7 @@
 - (void)isWifiEnabled:(CDVInvokedUrlCommand *)command;
 - (void)setWifiEnabled:(CDVInvokedUrlCommand *)command;
 - (void)scan:(CDVInvokedUrlCommand *)command;
+- (void)getWifiRouterIP:(CDVInvokedUrlCommand *)command;
 
 // Android Functions
 - (void)addNetwork:(CDVInvokedUrlCommand *)command;

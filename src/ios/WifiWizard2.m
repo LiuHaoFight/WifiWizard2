@@ -4,12 +4,34 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #include <ifaddrs.h>
 #import <net/if.h>
+#import <arpa/inet.h>
+#import "getgateway.h"
 
 @interface WifiWizard2 ()
 @property(nonatomic, strong) CDVInvokedUrlCommand *command;
 @end
 
 @implementation WifiWizard2
+
+- (void)getWifiRouterIP :(CDVInvokedUrlCommand *)command {
+     NSString *ipString = nil;
+    CDVPluginResult *pluginResult = nil;
+      if (nil != command) {
+        self.command = command;
+      }
+    struct in_addr gatewayaddr;
+    int r = getdefaultgateway(&(gatewayaddr.s_addr));
+    if(r >= 0) {
+        ipString = [NSString stringWithFormat: @"%s",inet_ntoa(gatewayaddr)];
+          pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                            messageAsString:ipString];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                            messageAsString:@"Not available"];
+    }
+      [self.commandDelegate sendPluginResult:pluginResult
+                                  callbackId:command.callbackId];
+}
 
 - (id)fetchSSIDInfo {
   // see http://stackoverflow.com/a/5198968/907720
