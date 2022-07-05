@@ -29,6 +29,7 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 
+import android.location.LocationManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
@@ -74,6 +75,7 @@ public class WifiWizard2 extends CordovaPlugin {
   private static final String GET_CONNECTED_BSSID = "getConnectedBSSID";
   private static final String GET_CONNECTED_NETWORKID = "getConnectedNetworkID";
   private static final String IS_WIFI_ENABLED = "isWifiEnabled";
+  private static final String IS_GPS_ENABLED = "isGpsEnabled";
   private static final String SET_WIFI_ENABLED = "setWifiEnabled";
   private static final String SCAN = "scan";
   private static final String ENABLE_NETWORK = "enable";
@@ -102,6 +104,7 @@ public class WifiWizard2 extends CordovaPlugin {
   private static boolean bssidRequested = false;
 
   private WifiManager wifiManager;
+  private android.location.LocationManager locationManager;
   private CallbackContext callbackContext;
   private JSONArray passedData;
 
@@ -146,6 +149,7 @@ public class WifiWizard2 extends CordovaPlugin {
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
     this.wifiManager = (WifiManager) cordova.getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+    this.locationManager = (LocationManager) cordova.getActivity().getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
     this.connectivityManager = (ConnectivityManager) cordova.getActivity().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
   }
 
@@ -159,6 +163,9 @@ public class WifiWizard2 extends CordovaPlugin {
     // Actions that do not require WiFi to be enabled
     if (action.equals(IS_WIFI_ENABLED)) {
       this.isWifiEnabled(callbackContext);
+      return true;
+    } else if (action.equals(IS_GPS_ENABLED)) {
+      this.isGpsEnabled(callbackContext);
       return true;
     } else if (action.equals(SET_WIFI_ENABLED)) {
       this.setWifiEnabled(callbackContext, data);
@@ -1193,6 +1200,19 @@ public class WifiWizard2 extends CordovaPlugin {
     callbackContext.success(isEnabled ? "1" : "0");
     return isEnabled;
   }
+
+  /**
+   * This method retrieves the current WiFi status
+   *
+   * @param callbackContext A Cordova callback context
+   * @return true if WiFi is enabled, fail will be called if not.
+   */
+  private boolean isGpsEnabled(CallbackContext callbackContext) {
+    boolean isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    callbackContext.success(isEnabled ? "1" : "0");
+    return isEnabled;
+  }
+  
 
   /**
    * This method takes a given String, searches the current list of configured WiFi networks, and

@@ -1,6 +1,6 @@
 {
-  "name": "@osvlabs/cordova-plugin-wifiwizard2",
-  "version": "3.1.5",
+  "name": "cordova-plugin-wifiwizard2",
+  "version": "3.1.6",
   "cordova": {
     "id": "wifiwizard2",
     "platforms": [
@@ -10,13 +10,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/osvlabs/WifiWizard2.git"
+    "url": "git+https://github.com/LiuHaoFight/WifiWizard2.git"
   },
   "author": "Myles McNamara",
   "license": "Apache 2.0",
   "description": "Cordova WiFi Manager for Android and iOS",
   "bugs": {
-    "url": "https://github.com/osvlabs/WifiWizard2/issues"
+    "url": "https://github.com/LiuHaoFight/WifiWizard2/issues"
   },
   "engines": {
     "cordovaDependencies": {
@@ -25,7 +25,7 @@
       }
     }
   },
-  "homepage": "https://github.com/osvlabs/WifiWizard2.git#readme",
+  "homepage": "https://github.com/LiuHaoFight/WifiWizard2.git#readme",
   "keywords": [
     "ecosystem:cordova",
     "cordova-android",

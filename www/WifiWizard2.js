@@ -311,6 +311,19 @@ var WifiWizard2 = {
         });
     },
 
+    isGpsEnabled: function () {
+        return new Promise(function (resolve, reject) {
+            cordova.exec(
+                // Cordova can only return strings to JS, and the underlying plugin
+                // sends a "1" for true and "0" for false.
+                function (result) {
+                    resolve(result == "1");
+                },
+                reject, "WifiWizard2", "isGpsEnabled", []
+            );
+        });
+    },
+
     /**
      * Enable or Disable WiFi
      * @param enabled
